@@ -1,0 +1,29 @@
+SELECT c.nombre, SUM(eb.cantidad)
+FROM existenciasbodega eb JOIN producto p
+ON eb.idProducto = p.id
+JOIN categoriaproducto cp
+ON p.id = cp.idProducto
+JOIN categoria c
+ON c.id = cp.idCategoria
+GROUP BY c.id, c.nombre;
+
+SELECT p.nombre, SUM(cantidad), v.fecha
+FROM producto p JOIN productosenventa pev
+ON p.id = pev.idProducto
+JOIN venta v
+ON v.id = pev.idVenta
+GROUP BY v.fecha;
+
+SELECT v.*, b.*
+FROM venta v JOIN boletassii b
+ON v.id = b.idVenta;
+
+SELECT v.nombre, venta.*
+FROM vendedores v JOIN venta
+ON v.rut = venta.rutVendedor;
+
+SELECT v.*, p.nombre, p.precio
+FROM venta v JOIN productosenventa pev
+ON v.id = pev.idVenta
+JOIN producto p
+ON p.id = pev.idProducto;
